@@ -23,15 +23,11 @@ Driver* GenerateDriver( Driver* d,Road* r, int line_index, float init_distance/*
 {
 	
 	int num_of_lines = r->lines()->size();
-	//int line_index = rand()%(num_of_lines-1)+1;
 	d->set_direction(r->lines()->at(line_index).direction());
-	//d->set_pre_vehicle(pre_vehicle);
 	d->set_light_group(r->light_group());
 	d->set_my_road(r);
 	d->set_line_index(line_index);
 	d->my_line()->reorder();
-// 	d->set_vehicle(*GenerateVehicle(d->vehicle(),r->road_id(),line_index,init_distance));
-// 	d->my_line()->reorder();
 	int generate_count = 0;
 	do
 	{
@@ -43,22 +39,15 @@ Driver* GenerateDriver( Driver* d,Road* r, int line_index, float init_distance/*
 			break;
 		}
 	} while (d->overlapped());
-	//d->set_vehicle(vehicle_index);
 	return d;
 }
 
 DriverContainer* GenerateDrivers( DriverContainer* dc,Road* r,int line_index)
 {
-	//r->lines()->at(line_index).clear_vehicles();
-// 	Driver* predriver = new Driver();
-// 	Driver* nextDriver = new Driver();
-// 	auto vehicle_iter = r->line_at(line_index)->vehicle_begin();
 	int num_of_vehicles = r->line_at(line_index)->num_of_vehicles();
-	//GenerateDriver(predriver,r,line_index,0);
 	for (int vehicle_index = 0; vehicle_index < num_of_vehicles; ++vehicle_index) {
 
 		dc->push_back(*GenerateDriver(&(Driver(Vehicle())),r,line_index));
-		//temp_driver = 
 	}
 	return dc;
 }
@@ -78,10 +67,6 @@ Vehicle* GenerateVehicle( Vehicle* v, int road_index, int line_index, float init
 		dis = 0;
 		id = line_index;
 	}
-	//Vehicle v;
-	//std::srand(unsigned(std::time(NULL)));
-	string v_id;
-	v_id += rand()%26 + 'A';
 	switch (SelectCase(2,10,8,-1))
 	{
 	case 1:
@@ -160,10 +145,7 @@ Line* GenerateLine( Line* l,Road* r, Direction dir )
 {
 	l->set_index( r->lines()->size());
 	l->set_direction(dir);
-// 	while (--num_of_vehicles > 0)
-// 	{
-// 		l->vehicles()->push_back(GenerateVehicle(&Vehicle(),r->road_index(),l->index()));
-// 	}
+
 	l->set_my_road(r);
 	return l;
 }
@@ -187,30 +169,7 @@ Road* GenerateRoad( Road* r,Cross* c,int index )
 	r->add_line(*GenerateLine(&Line(),r,STRAIGHT));
 	r->add_line(*GenerateLine(&Line(),r,STRAIGHT));
 	r->add_line(*GenerateLine(&Line(),r,STRAIGHT_LEFT));
-	//r->set_light_group(&DEF_RED_LIGHT);
-	//r->add_line_light(LineType(++lineid,STRAIGHT),SingleLight(STRAIGHT,GREEN));
-// 	r->add_line_light(,SingleLight(ALL,RED,false));
-// 	r->add_line_light(*GenerateLine(&Line(),r,STRAIGHT),SingleLight(ALL,YELLOW,false));
-// 	r->add_line_light(*GenerateLine(&Line(),r,LEFT),SingleLight(ALL,GREEN,true));
-// 	r->set_duration(3);
-// 	Direction dir = GenerateDirection();
-// 	switch (SelectCase(3,8,4,-1))
-// 	{
-// 	case 1:
-// 		{
-// 			r->add_line_light(*GenerateLine(&Line(),r,dir),SingleLight(dir,GREEN));
-// 			break;
-// 		}
-// 	case 2:
-// 		{
-// 			r->add_line_light(*GenerateLine(&Line(),r,dir),SingleLight(dir,GREEN));
-// 			dir = GenerateDirection();
-// 			r->add_line_light(*GenerateLine(&Line(),r,dir),SingleLight(dir,GREEN));
-// 			break;
-// 		}
-// 	default:
-// 		break;
-// 	}
+	
 	return r;
 }
 
@@ -222,15 +181,11 @@ Road* GenerateRoad( Road* r,Cross* c,int index )
 */
 Cross* GenerateCross( Cross* c )
 {
-	
-
-	//Cross* c = new Cross();
 	c->set_cross_id(rand()%899+1000);
 	c->set_cross_name("GeneratedCross");
 	int num_of_roads=DEF_ROADS;
 	int nor = num_of_roads;
 	while (nor>0) {
-	//	c->add_light_group(*GenerateLightGroup(&LightGroup()));
 		c->add_road(*GenerateRoad(&Road(),c,num_of_roads-nor));
 		if (nor == num_of_roads)
 		{
@@ -245,18 +200,3 @@ Cross* GenerateCross( Cross* c )
 	}
 	return c;
 }
-
-// LightGroup* GenerateLightGroup( LightGroup* lg )
-// {
-// 	//LightGroup* lg = new LightGroup();
-// 	lg->add_light(SingleLight(ALL,GREEN));
-// 	lg->add_light(SingleLight(ALL,YELLOW));
-// 	lg->add_light(SingleLight(ALL,RED));
-// 	
-// 	lg->lights()->insert(lg->lights()->begin(),SingleLight(dir,GREEN));
-// 
-// }
-
-
-
-

@@ -104,7 +104,6 @@
     <ClInclude Include="Controller\ArrowDrawer.h" />
     <ClInclude Include="Controller\RectDrawer.h" />
     <ClInclude Include="Controller\TrafficDrawer.h" />
-    <ClInclude Include="Core\core.h" />
     <ClInclude Include="Core\Cross.h" />
     <ClInclude Include="Core\LightGroup.h" />
     <ClInclude Include="Core\Line.h" />

@@ -22,26 +22,6 @@ FixedScheduler::~FixedScheduler(void)
 
 }
 
-// float DefaultScheduler::cal_vehicle( Vehicle& v )
-// {
-// 	
-// }
-// 
-// float DefaultScheduler::cal_line( Line& l )
-// {
-// 	
-// }
-// 
-// float DefaultScheduler::cal_direction( Road& r,Direction& dir )
-// {
-// 	
-// }
-// 
-// 
-// float DefaultScheduler::cal_road( Road& r )
-// {
-// 
-// }
 
 void FixedScheduler::first_time_calculate() {
 	if (cross_ != NULL) 
@@ -101,7 +81,6 @@ int FixedScheduler::cal_red_time(Road& r) {
 }
 void FixedScheduler::initial()
 {
-	//cross_ = GLOBAL_EMU->cross();
 	name_ = L"∂®∂Ó≈‰ ±";
 	min_green_time_ = 20;
 	max_red_time_ = 100;

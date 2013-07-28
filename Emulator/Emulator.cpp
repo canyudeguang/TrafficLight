@@ -17,13 +17,11 @@ extern bool thread_exit = false;
 Emulator::Emulator():initialized_(false),thread_id_drivers_(0)
 {
 	cross_ = NULL;
-	//drivers_ = new DriverContainer();
 }
 
 Emulator::~Emulator()
 {
 	delete cross_;
-	//delete drivers_;
 }
 
 void Emulator::initial() {
@@ -53,9 +51,7 @@ bool Emulator::start()
 		resume();
 		return true;
 	}
-	//void (*p_thread_drivers)() = &thread_drivers_start;
 	thread_id_drivers_ = CreateThread(NULL,0,thread_drivers_start,(LPVOID)cross_,0,NULL);
-	//= _beginthreadex(NULL,NULL,thread_drivers_start,static_cast<void*>(drivers_),NULL,NULL);
 	if (thread_id_drivers_>0) {
 		return true;
 	}
@@ -80,9 +76,6 @@ void Emulator::resume() {
 
 void Emulator::stop() {
 	thread_exit = true;
-	// 	if (thread_id_drivers_>0) {
-	// 		TerminateThread(thread_id_drivers_,0);
-	// 	}
 	initialized_ = false;
 	thread_id_drivers_ = 0;
 }
@@ -98,12 +91,9 @@ void Emulator::restart()
 
 DWORD __stdcall thread_drivers_start( void* cross )
 {
-
-	//DriverContainer* dc = static_cast<DriverContainer*> (cross);
 	Cross* c = static_cast<Cross*>( cross);
 	while (!thread_exit)
 	{
-		//if (DO_IT_NOW) {
 		auto road_iter = c->roads()->begin();
 		for (; road_iter!=c->roads()->end(); ++road_iter)
 		{
@@ -121,7 +111,6 @@ DWORD __stdcall thread_drivers_start( void* cross )
 					line_iter->processed();
 				}
 				auto drivers = line_iter->drivers();
-				//auto drivers_iter = drivers->begin();
 				for (int driver_index=0; driver_index<line_iter->drivers()->size(); ++driver_index) {
 					if (!(drivers->at(driver_index).i_am_dieing())) {
 						drivers->at(driver_index).do_it();
@@ -160,7 +149,7 @@ void Emulator::set_num_of_roads(int n_roads) {
 
 void Emulator::set_num_of_lines(int n_lines,int road_index) 
 {
-	//if (cross_->roads()->empty()) 
+
 	Road* r = cross_->road_at(road_index);
 	int count = n_lines - r->num_of_lines();
 	if (count > 0) {
@@ -178,27 +167,6 @@ void Emulator::set_num_of_lines(int n_lines,int road_index)
 }
 
 void Emulator::set_num_of_vehicles(int n_vehicles,int line_index, int road_index) {
-// 	Line* l = cross_->road_at(road_index)->line_at(line_index);
-// 	int count = n_vehicles - l->num_of_vehicles();
-// 	int veh_index = l->num_of_vehicles();
-// 	if (count > 0) {
-// 		while (count-- > 0)
-// 		{
-// 			//l->set_num_of_vehicles(num_of_vehicles()+count);
-// 			l->add_driver(
-// 				*GenerateDriver(
-// 				&Driver(Vehicle()),
-// 				cross_->road_at(road_index),line_index));
-// 		}
-// 		l->reorder();
-// 
-// 	}
-// 	else if (count<0) {
-// 		while (count-- > 0)
-// 		{
-// 			l->drivers()->pop_back();
-// 		}
-// 	}
 	cross_->road_at(road_index)->line_at(line_index)->set_num_of_vehicles(n_vehicles);
 }
 
@@ -225,7 +193,6 @@ void Emulator::set_scheduler( Scheduler* s )
 {
 	for_each(cross_->roads()->begin(),cross_->roads()->end(), [&](Road& r) {
 		r.set_scheduler(s);
-		//r.set_light_group(&SELECTED_SCHEDULER->calculate(r));
 	});
 
 }

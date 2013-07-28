@@ -3,7 +3,6 @@
 #include "../stdafx.h"
 
 #include "../Generic.h"
-#include "../Core/core.h"
 
 class Driver;
 class Cross;
@@ -19,6 +18,7 @@ enum EMU_STATE
 	STARTED,
 	SUSPENDED
 };
+
 class Emulator
 {
 public:
@@ -38,8 +38,6 @@ public:
 	Cross*& cross() { return cross_; }
 	void set_cross(Cross*& cross) { cross_ = cross; }
 	void restart();
-// 	DriverContainer* drivers() const { return drivers_; }
-// 	void set_drivers(DriverContainer*& drivers) { drivers_ = drivers; }
 	void initial();
 	bool start();
 	void pause();
@@ -49,7 +47,6 @@ public:
 protected:
 private:
 	Cross* cross_;
-	//DriverContainer* drivers_;
 	bool initialized_;
 	HANDLE thread_id_drivers_;
 	

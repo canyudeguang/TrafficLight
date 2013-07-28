@@ -10,11 +10,10 @@ class Scheduler;
 
 
 typedef vector<Scheduler*> SchedulerPointerContainer;
-//统一单位为m/s
-//精度为0.1m
-extern float LEGNTH_PRECISE;
+//单位为m/s
 
-//时间间隔为0.1s
+
+//时间间隔
 extern float TIME_DELIM_SEC;
 extern float TIME_DELIM_DRIVER_DO;
 
@@ -34,12 +33,12 @@ extern float REAL_METERS;
 extern float MAX_REAL_METERS;
 extern float REAL_LINE_WIDTH;
 extern float REAL_STOP_LINE;
-//1.6-2.1
+//1.6-2.1m
 extern float REAL_VEH_WIDTH;
 extern float REAL_ARROW_WIDTH;
 extern float RAD;
 
-//600 / 150
+//600pixel / 150m
 extern float VIRTUAL_RATIO;
 
 extern int MAIN_RECT_X;
@@ -48,12 +47,10 @@ extern int MAIN_RECT_WIDTH;
 extern int MAIN_RECT_HEIGHT;
 extern int LINE_WIDTH;
 extern int VEH_WIDTH;
-//extern int LIGHT_WIDTH;
 extern int CENTER_X;
 extern int CENTER_Y;
 extern int STOP_LINE;
 extern int LIGHT_RADIUM;
-//extern int ARROW_WIDTH;
 extern int ARROW_DISTANCE;
 extern float ARROW_VIRTUAL_RATIO;
 
@@ -70,7 +67,6 @@ extern COLOR LINE_EDGE_COLOR;
 extern COLOR CAR_COLOR;
 extern COLOR BUS_COLOR;
 extern COLOR ARROW_COLOR;
-//extern bool DO_IT_NOW;
 
 
 

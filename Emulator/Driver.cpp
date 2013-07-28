@@ -36,9 +36,6 @@ using std::pow;
 float DIE_METER = -6.0f;
 Driver::Driver(Vehicle v):vehicle_(v),wait_count_(0)
 {
-	//p_vehicle_ = new Vehicle();
-	//vehicle_ = new Vehicle();
-	// 	pre_vehicle() = NULL;
 	light_group_ = NULL;
 }
 
@@ -46,31 +43,21 @@ Driver::Driver( const Driver& rhs )
 {
 	vehicle_ = rhs.vehicle_;
 	direction_ = rhs.direction_;
-	/*	vehicle_index_ = rhs.vehicle_index_;*/
 	my_road_ = rhs.my_road_;
 	line_index_ = rhs.line_index_;
 	light_group_ = rhs.light_group_;
 	wait_count_ = rhs.wait_count_;
 }
 
-// Driver::Driver(LightGroup* light_group, Vehicle* previous_vehicle /* = NULL */)
-// 	:light_group_(light_group), pre_vehicle()(previous_vehicle)
-// {
-// 	//p_vehicle_ = new Vehicle();
-// 	p_vehicle_ = NULL;
-// }
-// 
+
 
 
 Driver::~Driver(void)
 {
-	//delete vehicle_;
 }
 
 
 Vehicle* Driver::pre_vehicle() {
-	/*if (vehicle_index_ > 0)*/
-	/*		return &(my_road_->line_at(line_index_)->vehicle_at(vehicle_index_ - 1));*/
 	return my_line()->pre_vehicle(*this);
 }
 
@@ -275,11 +262,6 @@ void Driver::do_it() {
 void Driver::slow_down( float distance )
 {
 	stopping = false;
-	// 	if (almost_equal(distance,0))
-	// 	{
-	// 		my_vehicle()->set_speed(0);
-	// 		return;
-	// 	}
 	float cur_speed = my_vehicle()->speed();
 	float to_speed = my_vehicle()->slow_speed();
 	/*if (to_speed < cur_speed) {*/
@@ -323,15 +305,6 @@ float Driver::reasonable(float a) {
 	{
 		a = my_vehicle()->max_break();
 	}
-	// 	float cur_speed = my_vehicle()->speed();
-	// 	float next_meter = cur_speed*TIME_DELIM_SEC + a*TIME_DELIM_SEC/2;
-	// 	if (pre_vehicle() != NULL)
-	// 	{
-	// 		if (next_meter < pre_vehicle()->m_to_cross() + pre_vehicle()->length())
-	// 		{
-	// 			;
-	// 		}
-	// 	}
 	return a;
 }
 
@@ -369,14 +342,6 @@ float Driver::safe_distance() {
 
 void Driver::accelarate()
 {
-	// 	float cur_speed = my_vehicle()->speed();
-	// 	if (cur_speed < to_speed) {
-	// 		float a = pow(to_speed,2) - pow(cur_speed,2) / distance / 2;
-	// 		if (a>my_vehicle()->max_accel()) a = my_vehicle()->max_accel();
-	// 		float next_speed = my_vehicle()->speed() + a * TIME_DELIM_SEC;
-	// 		if (next_speed>my_vehicle()->max_speed()) next_speed = my_vehicle()->max_speed();
-	// 		my_vehicle()->set_speed(next_speed);
-	// 	}
 	stopping = false;
 	float a;
 
@@ -434,11 +399,6 @@ void Driver::set_vehicle( Vehicle v )
 {
 	stopping = false;
 	vehicle_ = v;
-	// 	if (vehicle_!=NULL && vehicle_ != v) 
-	// 		delete vehicle_;
-	// 	vehicle_ = new Vehicle(*v);
-	// 	/*vehicle_index_ = vehicle_index;*/
-	// 	//my_road_->line_at(line_index_)->
 }
 
 bool Driver::operator!=( const Driver& rhs )

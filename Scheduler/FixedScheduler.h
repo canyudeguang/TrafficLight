@@ -9,13 +9,7 @@ public:
 	FixedScheduler(void);
 	~FixedScheduler(void);
 	void initial();
-// 	float cal_vehicle(Vehicle& v);
-// 
-// 	float cal_line(Line& l);
-// 
-// 	float cal_direction(Road& r,Direction& dir);
-// 
-// 	float cal_road(Road& r);
+
  
 	LightGroup calculate(Road& r);
 	void first_time_calculate();

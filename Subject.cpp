@@ -24,12 +24,7 @@ void Subject::Attach( Observer* obs )
 
 void Subject::Detach( Observer* obs )
 {
-// 	auto obs_iter = std::find(p_observer_->begin(),p_observer_->end(),obs);
-// 	if (obs_iter != p_observer_->end()) {
-// 		p_observer_->erase(obs_iter);
-// 	}
 	p_observer_->remove(obs);
-
 }
 
 void Subject::Notify()

@@ -36,19 +36,9 @@ public:
 	int index() const { return index_; }
 	void set_index(const int& index) { index_ = index; }
 	
-// 	string line_name() const { return line_name_; }
-// 	void set_line_name(const string& line_name) { line_name_ = line_name; }
 		
 	bool operator==(const Line& rhs);
 
-	/*void add_vehicle(Vehicle& v);*/
-
-//	void clear_vehicles();
-//	VehicleContainer* vehicles() const;
-//	void set_vehicles(VehicleContainer* vehicles);
-
-//	Road* p_my_road() const { return my_road_; }
-//	void set_p_my_road(Road* p_my_road) { my_road_ = p_my_road; }
 
 	bool operator < (const Line rhs);
 
@@ -95,9 +85,5 @@ private:
 
 	void sort_vehicles();
 	
-
-	//int line_type_;
-	// 	Cross* from_cross_;
-	// 	Cross* to_cross_;
 };
 

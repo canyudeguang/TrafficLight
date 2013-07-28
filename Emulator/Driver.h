@@ -46,7 +46,7 @@ public:
 	Direction direction() const { return direction_; }
 	void set_direction(const Direction& direction) { direction_ = direction; }
 	
- 	Vehicle* vehicle() { return &vehicle_; }
+	Vehicle* vehicle() { return &vehicle_; }
 	void set_vehicle(Vehicle v);
 	
 	float latency() const { return traits_.latency(); }
@@ -63,8 +63,6 @@ public:
 	void set_my_road(Road*& my_road);
 	int line_index() const { return line_index_; }
 	void set_line_index(const int& line_index) { line_index_ = line_index; }
-// 	int vehicle_index() const { return vehicle_index_; }
-// 	void set_vehicle_index(const int& vehicle_index) { vehicle_index_ = vehicle_index; }
 	float front_distance();
 	void do_last_past();
 
@@ -84,13 +82,11 @@ public:
 private:
 	Direction direction_;
 	DriverTraits traits_;
- 	Vehicle vehicle_;
-// 	Vehicle* pre_vehicle();
-	/*int vehicle_index_;*/
+	Vehicle vehicle_;
 	Road* my_road_;
 	int line_index_;
 	LightGroup* light_group_;
 	bool stopping;
 	int wait_count_;
-	// in reaction time
+
 };

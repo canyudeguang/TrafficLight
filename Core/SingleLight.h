@@ -22,14 +22,6 @@ public:
 	bool light_on() const { return on_; }
 	void set_light_on(const bool& light_on) { on_ = light_on; }
 	
-// 	bool operator<(const SingleLight rhs) const {
-// 		return color_<rhs.color_;
-// 	}
-// 
-// 	bool operator>(const SingleLight rhs) const {
-// 		return color_>rhs.color_;
-// 	}
-// 
 	bool operator!=(const SingleLight rhs) const {
 		return color_!=rhs.color_ 
 			|| direction_!=rhs.direction_;

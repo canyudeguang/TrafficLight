@@ -63,31 +63,6 @@ bool Cross::del_road( Road& road ) {
 }
 
 
-// bool Cross::add_light_group( LightGroup& lg )
-// {
-// // 	if ((find_if(light_groups_->begin(),light_groups_->end(),
-// // 		[&](LightGroup& l) {
-// // 			return l==lg;
-// // 		})) == light_groups_->end() ) {
-// // 			light_groups_->push_back(lg);
-// // 			return true;
-// // 	}
-// // 	return false;
-// 	return add_unique<LightGroup,LightGroupContainer>(lg,light_groups_);
-// }
-
-// bool Cross::del_light_group( LightGroup& lg )
-// {
-// // 	auto lg_iter = find_if(light_groups_->begin(),light_groups_->end(), 
-// // 		[&](LightGroup& l) {return l==lg;});
-// // 	if (lg_iter != light_groups_->end()) {
-// // 			light_groups_->erase(lg_iter);
-// // 			return true;
-// // 	}
-// // 	return false;
-// 	return search_for_delete<LightGroup,LightGroupContainer>(lg,light_groups_);
-// }
-
 void Cross::display( std::ostream& os )
 {
 	os<<"cross_id_: "<<cross_id_<<"\t";
@@ -113,11 +88,6 @@ void Cross::displayall(std::ostream& os )
 	});
 }
 
-// Cross::Cross( int cross_id, string cross_name, int num_of_roads, RoadContainer& cross ) :
-// 	cross_id_(cross_id), cross_name_(cross_name)
-// {
-// 	roads_ = cross;
-// }
 
 
 Road* Cross::road_at( int road_index )

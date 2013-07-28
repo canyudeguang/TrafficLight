@@ -39,9 +39,6 @@
     <ClInclude Include="Subject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Cross.h">
       <Filter>Header Files</Filter>
     </ClInclude>

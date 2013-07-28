@@ -19,20 +19,14 @@ using std::find;
 using std::min_element;
 using std::accumulate;
 using std::unique_ptr;
-//using std::max;
+
 
 
 typedef std::vector<Driver> DriverContainer;
 typedef std::vector<Vehicle> VehicleContainer;
 typedef std::vector<Road> RoadContainer;
 typedef std::vector<LightGroup> LightGroupContainer;
-// #ifdef max
-// #undef max
-// #endif
-// 
-// #ifdef min
-// #undef min
-// #endif
+
 
 enum Direction {
 	

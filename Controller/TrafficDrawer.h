@@ -23,4 +23,3 @@ void draw_vehicles(Road* r, int x5, int y5, int ratio, CDC* pDC );
 void draw_back_lines(Road* r,int x5,int y5,int ratio,CDC* pDC);
 void draw_arrow(Line* l,int x5, int y5, int ratio,CDC* pDC);
 CPoint left_top(CPoint* points,int count);
-//void draw_stop_line(int x1, int y1, int /*center_to_road*/, int road_width, int n_lines, int ratio, CPaintDC* pDC);

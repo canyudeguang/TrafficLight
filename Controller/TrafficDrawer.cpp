@@ -44,8 +44,8 @@ CPoint left_top(CPoint* points,int count) {
 void draw_stop_line( int x1, int y1, int center_to_road, int road_width, int n_lines, int ratio, CDC* pDC )
 {
 	center_to_road = STOP_LINE;
-	int x5 = get_x5(x1,STOP_LINE,ratio);//x1+center_to_road*cos(ratio/RAD);
-	int y5 = get_y5(y1,STOP_LINE,ratio);//y1-center_to_road*sin(ratio/RAD);
+	int x5 = get_x5(x1,STOP_LINE,ratio);
+	int y5 = get_y5(y1,STOP_LINE,ratio);
 	int x6 = get_x6(get_x2(x1,road_width,ratio),STOP_LINE,ratio);
 	int y6 = get_y6(get_y2(y1,road_width,ratio),STOP_LINE,ratio);
 
@@ -55,8 +55,6 @@ void draw_stop_line( int x1, int y1, int center_to_road, int road_width, int n_l
 
 	CPen line_edge_pen(PS_SOLID,2,RGB(0,0,0));
 	auto old_pen = pDC->SelectObject(line_edge_pen);
-	//int x7 = (x1+get_x2(x1,road_width,ratio))/2+center_to_road*cos(ratio/RAD);
-	//int y7 = (y1+get_y2(y1,road_width,ratio))/2;
 	pDC->MoveTo(x5,y5);
 	pDC->LineTo(x7,y7);
 	pDC->MoveTo(x7,y7 );
@@ -149,7 +147,6 @@ void draw_back_lines(Road* r,int x5,int y5,int ratio,CDC* pDC) {
 DWORD __stdcall draw_roads4( CDC* pDC )
 {
 	Emulator* emu = GLOBAL_EMU;
-	//if (!DATA_CHANGED) return;
 	if (emu->num_of_roads() == 4) {
 		int corner = 360 / emu->num_of_roads();
 		int road_id = 0;
@@ -168,17 +165,9 @@ DWORD __stdcall draw_roads4( CDC* pDC )
 
 	}
 	return 0;
-	//DATA_CHANGED = FALSE;
 }
 
 
-// void draw_all_vehicles(Emulator* emu,CDC* pDC) {
-// 	int road_x5;
-// 	for_each(emu->cross()->roads()->begin(),emu->cross()->roads()->end(),
-// 		[&](Road& r) {
-// 
-// 	});
-// }
 void draw_vehicles( Road* r, int x5, int y5, int ratio, CDC* pDC )
 {
 
@@ -190,12 +179,6 @@ void draw_vehicles( Road* r, int x5, int y5, int ratio, CDC* pDC )
 		draw_arrow(r->line_at(line_index),line_start_x,line_start_y,ratio,pDC);
 		for (int veh_index=0; veh_index<r->line_at(line_index)->num_of_vehicles(); ++veh_index) {
 			Vehicle& v=r->line_at(line_index)->vehicle_at(veh_index);
-// 			int urx = get_x4(veh_line_start_x,v.m_to_cross()*VIRTUAL_RATIO,ratio) > MAIN_RECT_WIDTH;
-// 			int ury = get_y4(veh_line_start_y,v.m_to_cross()*VIRTUAL_RATIO,ratio) > MAIN_RECT_HEIGHT;
-// 			if (urx > MAIN_RECT_WIDTH || ury >MAIN_RECT_HEIGHT)
-// 			{
-// 				break;
-// 			}
 			draw_vehicle(v,
 				get_x4(veh_line_start_x,v.m_to_cross()*VIRTUAL_RATIO,ratio),
 				get_y4(veh_line_start_y,v.m_to_cross()*VIRTUAL_RATIO,ratio),
@@ -284,103 +267,6 @@ void draw_lights( Road* r,int x5, int y5 , int road_ratio, CDC* pDC )
 }
 
 
-// void draw_arrow( Line* l,int x5, int y5, int ratio,CDC* pDC )
-// {
-// // 	CBrush arrow_brush(LINE_BACK_COLOR.rgb());
-// // 	int arrow_point_x = get_x2(x5,LINE_WIDTH/2,ratio);
-// // 	int arrow_point_y = get_y2(y5,LINE_WIDTH/2,ratio);
-// 	//ratio-=90;
-// 	CImage arrow_image;
-// 	
-// 	CStringW tail_string,image_string(DIR_PATH);
-// 	tail_string.Format(_T("%d.png"),ratio);
-// 	switch (l->direction())
-// 	{
-// 	case STRAIGHT:
-// 		image_string += CStringW (_T("\\res\\straight_"));
-// 		break;
-// 	case LEFT:
-// 		image_string += CStringW(_T("\\res\\left_"));
-// 		break;
-// 	case RIGHT:
-// 		image_string += CStringW(_T("\\res\\right_"));
-// 		break;
-// 	case STRAIGHT_LEFT:
-// 		image_string += CStringW(_T("\\res\\straight_left_"));
-// 		break;
-// 	case STRAIGHT_UTRUN:
-// 		image_string += CStringW(_T("\\res\\straight_uturn_"));
-// 		break;
-// 	default:
-// 		break;
-// 	}
-// 	image_string += tail_string;
-// 	arrow_image.Load(image_string);
-// 	//arrow_image.Load(_T("res\\straight_uturn_90.png"));
-// 	if (arrow_image.IsNull()) {
-// 		//MessageBox(pDC->GetWindow()->g,_T("你说！你把图片放哪里了！！！"));
-// 		
-// 		return;
-// 	}
-// 	int image_start_x = 0, image_start_y = 0;
-// 	float image_zoom_ratio = (float)ARROW_WIDTH/(float)arrow_image.GetWidth();
-// 	switch (ratio)
-// 	{
-// 	case 0:
-// 		image_start_x = get_x4(get_x2(x5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE+arrow_image.GetHeight(),ratio);
-// 		image_start_y = get_y4(get_y2(y5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE+arrow_image.GetHeight(),ratio);
-// 		arrow_image.Draw(pDC->m_hDC,
-// 			image_start_x,
-// 			image_start_y,
-// 			ARROW_WIDTH,
-// 			arrow_image.GetHeight()*image_zoom_ratio,
-// 			0,0,arrow_image.GetWidth(),arrow_image.GetHeight()
-// 			);
-// 
-// 
-// 
-// 		break;
-// 	case 90:
-// 		image_start_x = get_x4(get_x2(x5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE,ratio);
-// 		image_start_y = get_y4(get_y2(y5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE,ratio);
-// 		arrow_image.Draw(pDC->m_hDC,
-// 			image_start_x,
-// 			image_start_y,
-// 			arrow_image.GetWidth()*image_zoom_ratio,
-// 			ARROW_WIDTH,
-// 			0,0,arrow_image.GetWidth(),arrow_image.GetHeight()
-// 			);
-// 		break;
-// 	case 180:
-// 		image_start_x = get_x2(get_x4(get_x2(x5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE,ratio),ARROW_WIDTH,ratio);
-// 		image_start_y = get_y2(get_y4(get_y2(y5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE,ratio),ARROW_WIDTH,ratio);
-// 		arrow_image.Draw(pDC->m_hDC,
-// 			image_start_x,
-// 			image_start_y,
-// 			ARROW_WIDTH,
-// 			arrow_image.GetHeight()*image_zoom_ratio,
-// 			0,0,arrow_image.GetWidth(),arrow_image.GetHeight()
-// 			);
-// 		break;
-// 	case 270:
-// 		image_start_x = get_x2(get_x4(get_x2(x5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE+arrow_image.GetWidth(),ratio),ARROW_WIDTH,ratio);
-// 		image_start_y = get_y2(get_y4(get_y2(y5,(LINE_WIDTH-ARROW_WIDTH)/2,ratio),ARROW_DISTANCE+arrow_image.GetWidth(),ratio),ARROW_WIDTH,ratio);
-// 		arrow_image.Draw(pDC->m_hDC,
-// 			image_start_x,
-// 			image_start_y,
-// 			arrow_image.GetWidth()*image_zoom_ratio,
-// 			ARROW_WIDTH,
-// 			0,0,arrow_image.GetWidth(),arrow_image.GetHeight()
-// 			);
-// 		break;
-// 	default:
-// 
-// 		break;
-// 	}
-// 
-// }
-
-
 void draw_arrow(Line* l,int x5, int y5, int ratio,CDC* pDC) {
 	CBrush arrow_brush(ARROW_COLOR.rgb());
 	CPen arrow_pen(PS_SOLID,1,ARROW_COLOR.rgb());
@@ -412,15 +298,8 @@ void draw_arrow(Line* l,int x5, int y5, int ratio,CDC* pDC) {
 		return;
 		break;
 	}
-	//point_count=straight_left_arrow(arrow,x5,y5,ratio);
 	pDC->Polygon(arrow,point_count);
-	// 	pDC->MoveTo(x5,y5);
-	// 	for (int i=0; i<point_count; ++i)
-	// 	{
-	// 		pDC->LineTo(arrow[i]);
-	// 	}
 	pDC->SelectObject(old_brush);
 	pDC->SelectObject(arrow_pen);
-	//pDC->MoveTo(straight_arrow[0],straight_arrow[0].y);
 
 }

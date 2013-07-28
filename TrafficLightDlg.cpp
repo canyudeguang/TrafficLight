@@ -309,13 +309,9 @@ void CTrafficLightDlg::initial_data() {
 	SELECTED_SCHEDULER = find_scheduler(fixed_scheduler->name());
 	GLOBAL_EMU->initial();
 
-	//SELECTED_SCHEDULER->set_cross(GLOBAL_EMU->cross());
 	GLOBAL_EMU->set_scheduler(SELECTED_SCHEDULER);
 
 	_get_wpgmptr(&EXE_PATH);
-	//EXE_PATH = new WCHAR[PATH_MAX];
-	//DIR_PATH = new WCHAR[PATH_MAX];
-	//GetModuleFileName(NULL,EXE_PATH,sizeof(EXE_PATH));
 	directory_path(EXE_PATH,PATH_MAX,DIR_PATH);
 
 }
@@ -331,17 +327,10 @@ void CTrafficLightDlg::initial_graphic() {
 
 afx_msg void CTrafficLightDlg::OnTimer(UINT_PTR n)
 {
-	//DO_IT_NOW = true;
-
-
 
 	MEM_DC.FillSolidRect(0,0,RECT_PIC.Width(),RECT_PIC.Height(),BACKGROUND_COLOR.rgb());
 	draw_roads4(&MEM_DC);
 	pPIC_DC->BitBlt(0,0,RECT_PIC.Width(),RECT_PIC.Height(),&MEM_DC,0,0,SRCCOPY);
-	// 	MEM_DC.DeleteDC();
-	// 	MEM_DC_BITMAP.DeleteObject();
-	//ReleaseDC(pDC);
-	//CDialog::OnTimer(nIDEvent);
 }
 void CTrafficLightDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
@@ -383,17 +372,6 @@ void CTrafficLightDlg::OnPaint()
 	{
 		Invalidate(FALSE);
 		CDialogEx::OnPaint();
-		//CDC* pDC = GetDlgItem(IDC_PIC)->GetWindowDC();
-
-		/*
-		*	DrawOutRect()
-		*	DrawRoads()
-		*	DrawVehicles()
-		*	DrawLights()
-		*/
-
-		//draw_roads4(pDC);
-		//ReleaseDC(pDC);
 	}
 }
 
@@ -413,13 +391,10 @@ int CTrafficLightDlg::OnClose() {
 	return 0;
 }
 
-// int CTrafficLightDlg::OnEraseBkgnd() {
-// 	return TRUE;
-// }
 
 void CTrafficLightDlg::OnStnClickedPic()
 {
-	// TODO: Add your control notification handler code here
+
 }
 
 
@@ -443,21 +418,18 @@ void CTrafficLightDlg::selected_changed() {
 void CTrafficLightDlg::OnBnClickedRun()
 {
 	GLOBAL_EMU->start();
-	// TODO: Add your control notification handler code here
 }
 
 
 void CTrafficLightDlg::OnBnClickedPause()
 {
 	GLOBAL_EMU->pause();
-	// TODO: Add your control notification handler code here
 }
 
 
 void CTrafficLightDlg::OnBnClickedStop()
 {
 	GLOBAL_EMU->stop();
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -465,10 +437,6 @@ void CTrafficLightDlg::OnBnClickedStop()
 
 void CTrafficLightDlg::OnBnClickedButtonSettings()
 {
-	// TODO: Add your control notification handler code here
-	// 	CDialog* settings_dlg = new CDialog();
-	// 	settings_dlg->Create(L"IDD_SETTINGS_DIALOG",this);
-	// 	settings_dlg->ShowWindow(SW_SHOW);
 	CSettingsDlg settings_dlg;
 	settings_dlg.DoModal();
 }
@@ -482,7 +450,6 @@ void CTrafficLightDlg::OnBnClickedRadio1()
 			SELECTED_LINE->index());
 	}
 	selected_changed();
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -496,7 +463,6 @@ void CTrafficLightDlg::OnBnClickedRadio2()
 			SELECTED_LINE->index());
 	}
 	selected_changed();
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -512,7 +478,6 @@ void CTrafficLightDlg::OnBnClickedRadio3()
 		}
 		selected_changed();
 	}
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -528,8 +493,6 @@ void CTrafficLightDlg::OnBnClickedRadio4()
 		}
 		selected_changed();
 	}
-
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -540,8 +503,6 @@ void CTrafficLightDlg::OnBnClickedRadio5()
 		SELECTED_LINE = SELECTED_ROAD->line_at(0);
 		selected_changed();
 	}
-
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -597,7 +558,7 @@ void CTrafficLightDlg::OnDeltaposSpinVehicles(NMHDR *pNMHDR, LRESULT *pResult)
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	//@TN
 	*pResult = 0;
-	// TODO: Add your control notification handler code here
+
 	CString vehicles_string;
 	int cur_vehicles = 0;
 	GetDlgItem(IDC_EDIT_VEHICLES)->GetWindowTextW(vehicles_string);
@@ -628,7 +589,6 @@ void CTrafficLightDlg::OnCbnSelchangeComboCurScheduler()
 	CWnd* max_red_edit = GetDlgItem(IDC_EDIT_MAX_RED_TIME);
 	time_string.Format(_T("%d"),SELECTED_SCHEDULER->max_red_time());
 	max_red_edit->SetWindowTextW(time_string);
-	// TODO: Add your control notification handler code here
 }
 
 
@@ -637,12 +597,10 @@ void CTrafficLightDlg::OnNMCustomdrawSliderSpeed(NMHDR *pNMHDR, LRESULT *pResult
 	LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
 	//@TN
 	*pResult = 0;
-	// TODO: Add your control notification handler code here
 	CString speed_string;
 	CWnd* static_speed=GetDlgItem(IDC_STATIC_SPEED);
 	float new_speed = m_slider_simulate_speed_ratio.GetPos()/2.0f;
 	TIME_DELIM_DRIVER_DO = TIME_DELIM_SEC /new_speed;
-	//TIME_DELIM_DRIVER_DO = 0;
 	speed_string.Format(_T("%.1f"),new_speed);
 	speed_string += _T("x");
 	static_speed->SetWindowTextW(speed_string);
@@ -668,7 +626,6 @@ void CTrafficLightDlg::OnDeltaposSpinLoad(NMHDR *pNMHDR, LRESULT *pResult)
 	}
 	load_string.Format(_T("%d"),cur_load);
 	m_edit_load.SetWindowTextW(load_string);
-	// TODO: Add your control notification handler code here
 	*pResult = 0;
 }
 

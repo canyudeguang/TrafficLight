@@ -8,7 +8,6 @@ Road::Road()
 {
 	lines_ = new LineContainer();
 	light_group_ = new LightGroup();
-	//next_light_group_ = new LightGroup();
 }
 
 Road::Road(const Road& rhs )
@@ -18,7 +17,6 @@ Road::Road(const Road& rhs )
 	length_ = rhs.length_;
 	lines_ = new LineContainer(*rhs.lines());
 	light_group_ = new LightGroup(*rhs.light_group());
-	//next_light_group_ = new LightGroup(*rhs.next_light_group());
 	copied();
 }
 

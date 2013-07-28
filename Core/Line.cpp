@@ -8,24 +8,21 @@
 #include "../Globals.h"
 #include "../Emulator/Generator.h"
 
-float DEF_DRIVERS_PER_SECOND = 0.3f;
+
 
 Line::Line( int line_index, Direction direction ) :
 	index_(line_index),direction_(direction),
-	drivers_per_second_((rand()%200+800)/3600.0f),
+	drivers_per_second_((rand()%200+500)/3600.0f),
 	processed_count_(0)
 {
 	//	vehicles_ = new VehicleContainer();
 	drivers_ = new DriverContainer();
 }
 
-Line::Line():drivers_per_second_((rand()%200+800)/3600.0f),
+Line::Line():drivers_per_second_((rand()%200+500)/3600.0f),
 	processed_count_(0)
 {
 	index_=0;
-	//line_name_=L"Default_Line_Name";
-	//	p_my_road_=NULL;
-	//	vehicles_ = new VehicleContainer();
 	drivers_ = new DriverContainer();
 }
 
@@ -35,7 +32,6 @@ Line::Line(const Line& rhs) {
 	my_road_ = rhs.my_road_;
 	drivers_per_second_ = rhs.drivers_per_second_;
 	processed_count_ = rhs.processed_count_;
-	//	vehicles_ = new VehicleContainer(*rhs.vehicles());
 	drivers_ = new DriverContainer(*rhs.drivers());
 	copied();
 }
@@ -50,44 +46,19 @@ void Line::copied() {
 	});
 	reorder();
 }
-// void Line::set_num_of_vehicles(int n_vehicles) {
-// 	int count = n_vehicles - num_of_vehicles();
-// 	if (count>0) {
-// 		while(count-->0) {
-// 		}
-// 	}
-// }
+
 
 int Line::num_of_vehicles()
 {
-	return drivers_->size();//vehicles_->size();
+	return drivers_->size();
 }
 
 void Line::reorder() {
 	std::sort(drivers_->begin(),drivers_->end(),[&](Driver& ld,Driver& rd ) {
 		return rd.my_vehicle()->m_to_cross() > ld.my_vehicle()->m_to_cross();
 	});
-	// 	for_each(drivers_->begin(),drivers_->end(),[&](Driver& ld,Driver& rd ) {
-	// 
-	// 	});
+	
 }
-// void Line::sort_vehicles()
-// {
-// 	//std::sort(vehicles_->begin(),vehicles_->end(), VehicleDistanceCompare());
-// 	std::sort(drivers_->begin(),drivers_->end(),[&](Driver& lhs,Driver&rhs) {
-// 		return lhs.vehicle()->m_to_cross() > rhs.vehicle()->m_to_cross();
-// 	});
-// }
-
-// itertor Line::vehicle_begin()
-// {
-// 	return vehicles_->begin();
-// }
-// 
-// itertor Line::vehicle_end()
-// {
-// 	return vehicles_->end();
-// }
 
 bool Line::operator<( const Line rhs )
 {
@@ -110,13 +81,9 @@ void Line::set_drivers( DriverContainer*& drivers )
 
 void Line::add_driver( Driver& d )
 {
-	//d.set_vehicle(&v);
-	//vehicles_->push_back(*d.vehicle());
-	//d.set_vehicle(&vehicle_at(d.vehicle_index()),d.vehicle_index());
+
 	drivers_->push_back(d);
 	d.set_my_road(my_road_);
-	//reorder();
-	//vehicles_->push_back(v);
 }
 
 void Line::time_for_add_driver() {

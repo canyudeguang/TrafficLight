@@ -17,13 +17,11 @@ typedef vector<LineType> LineContainer;
 class Road
 {
 public:
-	//Road(int road_id, int num_of_lines, string road_name);
 
 	Road();
 	~Road();
 	Road(const Road& rhs);
- 	int num_of_lines() const;
-// 	void set_num_of_lines(int num_of_lines) { num_of_lines_ = num_of_lines; }
+	int num_of_lines() const;
 	
 	int road_id() const { return road_id_; }
 	void set_road_id(const int& road_id) { road_id_ = road_id; }
@@ -41,7 +39,6 @@ public:
 	bool del_line(LineType& lt);
 
 	void set_direction(int index,Direction dir);
-	//LightStatus light_status(const Line& line) const;
 	void display(std::ostream& os);
 	void displayall( std::ostream& os);
 
@@ -51,9 +48,6 @@ public:
 	
 	LightGroup* light_group() const { return light_group_; }
 	void set_light_group(LightGroup* light_group);
-	
-// 	LightGroup* next_light_group  () const{ return next_light_group_; }
-// 	void set_next_light_group(LightGroup* next_light_group);
 	
 	Scheduler* scheduler() { return scheduler_; }
 	void set_scheduler(Scheduler* scheduler) { scheduler_ = scheduler; }
@@ -70,8 +64,6 @@ public:
 	
 	int num_of_vehicles();
 	bool add_line_light(LineType& line,SingleLight& sl);
-	//int index() const { return index_; }
-	//void set_index(const int& index) { index_ = index; }
 	int duration();
 	void set_duration(int sec);
 	void copied();
@@ -83,14 +75,11 @@ public:
 	bool is_front(Road& r);
 private:
 	
-	//int index_;
-	//int num_of_lines_;
 	int road_id_;
 	string road_name_;
 	float length_;
 	LineContainer* lines_;
 	LightGroup* light_group_;
-	//LightGroup* next_light_group_;
 	Scheduler* scheduler_;
 	Cross* my_cross_;
 

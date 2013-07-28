@@ -6,8 +6,7 @@ class Emulator;
 class Scheduler;
 class Line;
 
-extern float LEGNTH_PRECISE = 0.00001f;
-//时间间隔为0.1s
+//时间间隔
 #ifdef _DEBUG
 extern float TIME_DELIM_SEC = 0.1f;
 #else
@@ -19,7 +18,7 @@ extern float TIME_DELIM_DRIVER_DO = 0.025f;
 extern Emulator* GLOBAL_EMU = NULL;
 extern int DEF_ROADS = 4;
 extern int DEF_LINES = 3;
-extern int DEF_VEHICLES = 50;
+extern int DEF_VEHICLES = 20;
 
 extern float SAFE_DISTANCE_MULTI = 1.2f;
 
@@ -34,10 +33,6 @@ extern float MAX_REAL_METERS = 1000.0f;
 extern float REAL_VEH_WIDTH = 1.8f;
 extern float REAL_ARROW_WIDTH = 1.3f;
 extern int DEF_YELLOW_TIME = 3;
-
-//600 / 150
-
-
 
 extern int MAIN_RECT_X = 0;
 extern int MAIN_RECT_Y = 0;
