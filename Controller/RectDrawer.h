@@ -1,0 +1,16 @@
+int get_x1(int x2, int a, int ratio);
+int get_y1(int y2, int a, int ratio);
+int get_x2(int x1, int a, int ratio);
+int get_y2(int y1, int a, int ratio);
+int get_x3(int x2, int b, int ratio);
+int get_y3(int y2, int b, int ratio);
+int get_x4(int x1, int b, int ratio);
+int get_x5(int x1, int stop_line, int ratio);
+int get_y5(int y1, int stop_line, int ratio);
+int get_x6(int x2, int stop_line, int ratio);
+int get_y6(int y2, int stop_line, int ratio);
+int x_move_to(int x,int length, int ratio);
+int y_move_to(int y,int length, int ratio);
+int get_y4(int y1,int b, int ratio);
+int get_y2_from_y3(int y,int length,int ratio);
+int get_x2_from_x3(int x,int length, int ratio);
